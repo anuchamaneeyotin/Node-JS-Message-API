@@ -1,0 +1,32 @@
+{
+  "name": "webhook",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google-cloud/dialogflow": "^6.10.0",
+    "@line/bot-sdk": "^9.4.4",
+    "@line/liff": "^2.24.0",
+    "actions-on-google": "^3.0.0",
+    "app-deep-link": "^1.0.1",
+    "base64-img": "^1.0.1",
+    "body-parser": "^1.20.3",
+    "buffer": "^6.0.3",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "node-deeplink": "^0.6.0",
+    "open": "^10.1.0",
+    "qrcode": "^1.5.4",
+    "request": "^2.88.2",
+    "uuid": "^11.0.3"
+  }
+}

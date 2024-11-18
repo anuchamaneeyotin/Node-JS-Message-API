@@ -1,0 +1,724 @@
+{
+	"info": {
+		"_postman_id": "74b76085-ff53-4c13-b31e-aa96a5c33be7",
+		"name": "SCB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39556197",
+		"_collection_link": "https://api-team-3907.postman.co/workspace/API-Team-Workspace~d0431b36-296c-4de8-8809-aab1dae9b12f/collection/39556197-74b76085-ff53-4c13-b31e-aa96a5c33be7?action=share&source=collection_link&creator=39556197"
+	},
+	"item": [
+		{
+			"name": "TOKEN",
+			"item": [
+				{
+					"name": "Get token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "{{content}}",
+								"type": "text"
+							},
+							{
+								"key": "resourceOwnerId",
+								"value": "{{owner}}",
+								"type": "text"
+							},
+							{
+								"key": "requestUId",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "accept-language",
+								"value": "TH",
+								"type": "text"
+							},
+							{
+								"key": "applicationId",
+								"value": "{{apikey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"applicationKey\" : \"l7c968392fb6fc4d5dafa08fa406d80cf1\",\r\n\t\"applicationSecret\" : \"d7d5fd9ed3a8403f9fd32b78e9b2bbfd\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v1/oauth/token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorize",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "apikey",
+								"value": "{{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "apisecret",
+								"value": "{{secret}}",
+								"type": "text"
+							},
+							{
+								"key": "resourceOwnerId",
+								"value": "{{owner}}",
+								"type": "text"
+							},
+							{
+								"key": "requestUId",
+								"value": "1944626999110",
+								"type": "text"
+							},
+							{
+								"key": "response-channel",
+								"value": "mobile",
+								"type": "text"
+							},
+							{
+								"key": "endState",
+								"value": "mobile_app",
+								"type": "text"
+							},
+							{
+								"key": "accept-language",
+								"value": "EN",
+								"type": "text"
+							},
+							{
+								"key": "applicationId",
+								"value": "{{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "grant_type",
+								"value": "client_credentials",
+								"description": "authorization_code or client_credentials",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api-sandbox.partners.scb/partners/sandbox/v2/oauth/authorize?response_type=code",
+							"protocol": "https",
+							"host": [
+								"api-sandbox",
+								"partners",
+								"scb"
+							],
+							"path": [
+								"partners",
+								"sandbox",
+								"v2",
+								"oauth",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "App payment",
+			"item": [
+				{
+					"name": "Deep link",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "{{content}}",
+								"type": "text"
+							},
+							{
+								"key": "accept-language",
+								"value": "EN",
+								"type": "text"
+							},
+							{
+								"key": "resourceOwnerId",
+								"value": "{{apikey}}",
+								"type": "text"
+							},
+							{
+								"key": "requestUId",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "channel",
+								"value": "scbeasy",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"PURCHASE\",\r\n    \"transactionSubType\": [\"BP\", \"CCFA\"],\r\n    \"sessionValidityPeriod\": 60,\r\n    \"sessionValidUntil\": \"300\",\r\n    \"billPayment\": {\r\n        \"paymentAmount\": 10000.00,\r\n        \"accountTo\": \"050585498586450\",\r\n        \"ref1\": \"ABCDEFGHIJ1234567890\",\r\n        \"ref2\": \"ABCDEFGHIJ1234567890\",\r\n        \"ref3\": \"NZX\"\r\n    },\r\n    \"creditCardFullAmount\": {\r\n        \"merchantId\": \"332197459074175\",\r\n        \"terminalId\": \"942204000110402\",\r\n        \"orderReference\": \"AA100001\",\r\n        \"paymentAmount\": 10000.00\r\n    },\r\n    \"merchantMetaData\": {\r\n        \"callbackUrl\": \"//login/18f2df5d-62a0-4bd2-8cd5-afd353268354\",\r\n        \"merchantInfo\": {\r\n    \"name\": \"SANDBOX MERCHANT NAME\"\r\n    }\r\n    }\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/v3/deeplink/transactions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v3",
+								"deeplink",
+								"transactions"
+							]
+						},
+						"description": "Post แล้วจะได้ Transaction ID มา"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept-language",
+								"value": "EN",
+								"type": "text"
+							},
+							{
+								"key": "requestUId",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "resourceOwnerId",
+								"value": "{{apikey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/​v2/​transactions?transactionId=202411125u1yEQecmJt3jv0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"​v2",
+								"​transactions"
+							],
+							"query": [
+								{
+									"key": "transactionId",
+									"value": "202411125u1yEQecmJt3jv0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "QR Code payment",
+			"item": [
+				{
+					"name": "Create QR CODE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{content}}",
+								"type": "text"
+							},
+							{
+								"key": "accept-language",
+								"value": "EN",
+								"type": "text"
+							},
+							{
+								"key": "requestUId",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "resourceOwnerId",
+								"value": "{{apikey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"qrType\": \"PPCS\",\r\n    \"ppType\": \"BILLERID\",\r\n    \"ppId\": \"050585498586450\",\r\n    \"amount\": \"100.00\",\r\n      \"ref1\": \"REFERENCE1\",\r\n      \"ref2\": \"REFERENCE2\",\r\n      \"ref3\": \"NZX\",\r\n    \"merchantId\": \"332197459074175\",\r\n    \"terminalId\": \"942204000110402\",\r\n    \"invoice\": \"INVOICE\",\r\n    \"csExtExpiryTime\" : \"60\"\r\n  }"
+						},
+						"url": {
+							"raw": "{{url}}/v1/payment/qrcode/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"payment",
+								"qrcode",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create QR CODE 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "accept-language",
+								"value": "EN",
+								"type": "text"
+							},
+							{
+								"key": "requestUId",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "resourceOwnerId",
+								"value": "02326ae3-9233-4032-9c27-6f83372b8629",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"qrType\": \"PPCS\",\r\n  \"amount\": \"2000\",\r\n  \"invoice\": \"9610\",\r\n  \"ppId\": \"050585498586450\",\r\n  \"ppType\": \"BILLERID\",\r\n  \"ref1\": \"PORTALSANDBOXREF1\",\r\n  \"ref2\": \"PORTALSANDBOXREF1\",\r\n  \"ref3\": \"NZX\",\r\n  \"terminalId\": \"942204000110402\",\r\n  \"merchantId\": \"332197459074175\"\r\n}"
+						},
+						"url": {
+							"raw": "https://api-sandbox.partners.scb/partners/sandbox/v1/maemanee/payment/qr/create",
+							"protocol": "https",
+							"host": [
+								"api-sandbox",
+								"partners",
+								"scb"
+							],
+							"path": [
+								"partners",
+								"sandbox",
+								"v1",
+								"maemanee",
+								"payment",
+								"qr",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Confirm payment",
+			"item": [
+				{
+					"name": "Confirm 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "{{content}}",
+								"type": "text"
+							},
+							{
+								"key": "accept-language",
+								"value": "EN",
+								"type": "text"
+							},
+							{
+								"key": "requestUId",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "resourceOwnerId",
+								"value": "{{apikey}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/v1/payment/billpayment/inquiry?billerId=050585498586450&transactionDate=2024-11-12&eventCode=00300100&reference1=PORTALSANDBOXREF1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"payment",
+								"billpayment",
+								"inquiry"
+							],
+							"query": [
+								{
+									"key": "billerId",
+									"value": "050585498586450"
+								},
+								{
+									"key": "transactionDate",
+									"value": "2024-11-12"
+								},
+								{
+									"key": "partnerTransactionId",
+									"value": "20241109082552793000000",
+									"disabled": true
+								},
+								{
+									"key": "eventCode",
+									"value": "00300100"
+								},
+								{
+									"key": "reference1",
+									"value": "PORTALSANDBOXREF1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Slip Verification",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "requestUID",
+								"value": "{{$guid}}"
+							},
+							{
+								"key": "resourceOwnerID",
+								"value": "{{apikey}}"
+							},
+							{
+								"key": "accept-language",
+								"value": "EN",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/v1/payment/billpayment/transactions/202411125u1yEQecmJt3jv0?sendingBank=014",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"payment",
+								"billpayment",
+								"transactions",
+								"202411125u1yEQecmJt3jv0"
+							],
+							"query": [
+								{
+									"key": "sendingBank",
+									"value": "014"
+								}
+							]
+						},
+						"description": "ตรวจสอบ Slip"
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm 1",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Confirm 3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "accept-language",
+						"value": "EN",
+						"type": "text"
+					},
+					{
+						"key": "requestUId",
+						"value": "{{$guid}}",
+						"type": "text"
+					},
+					{
+						"key": "resourceOwnerId",
+						"value": "l7c968392fb6fc4d5dafa08fa406d80cf1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"merchantId\": \"2020000205\",\r\n    \"encryptedValue\": \"MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAg3Pl2zcVCOWBv7JZ3VQyQ082SjL5GauzWTyzPQxejtLBNkMfd/cH97TBV6Je5YMn46bY67ayFi2xfCoh8Lg0QWP8vVovfw8QIoyR4QaE0+zUiz4/i6M3k628pVBFrge/Iuz0CgmAN5g3AGS3CRq1+XdJvIwpbnfIrQY0UFubzUvKkQyNNiI2LINSXLKMjxp/jPRDbA81/CXmG47VVMwU8hr89xqSCKMLSw1KMbfn4SGy/6qosyIFebPyP3wdNrfRGHuiT1f7/3sfICtVT2/k5Rh2cpvI//nn9LuOVnVbIdIn5zLVvASKCzbxE2JyF4Bd6qbEotkSEmdrNzSaNd7MV7JV7D2r7EbVaajHZIiS8FwCCCCaDJeRM44uXZR30Kie2HzR3iTeQIe6g7Mdb8JsKHvgL9TXdSwfkbcuCOwCluwrVj1CpQkvBQ1xe31+/+cxBKXUUVnNZ9A1i57elgANEfxB7F6kGLFL+eFdIOU5Os0X+9wNTMkFgXAqHWoL7oaHR3ngFG0UsUv0Dhzx3q7/yPoFpVqf9XnjHwZf41NfwYFfoGMJ50HdmWpxDRPDKb3vfWgTVqLdo7hN4njg0Fm3yWg2EbiKDp29oenN6+FV6QmXeiy7Od2nLf1t00fwIbIvzwv2BW1k4MFzm7A6w954WoJnLI0Xf8uMdP/FebSZaFECAwEAAQ==\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api-sandbox.partners.scb/partners/sandbox/v1/payment/inquiry",
+					"protocol": "https",
+					"host": [
+						"api-sandbox",
+						"partners",
+						"scb"
+					],
+					"path": [
+						"partners",
+						"sandbox",
+						"v1",
+						"payment",
+						"inquiry"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://webhook.site/5935ee6d-6d57-4a94-b483-c012d3aadb97",
+					"protocol": "https",
+					"host": [
+						"webhook",
+						"site"
+					],
+					"path": [
+						"5935ee6d-6d57-4a94-b483-c012d3aadb97"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ngrok",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"event\":\"test\", \r\n\"data\": {\"message\": \"Hello, World! webhook\"}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm 4",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://api-sandbox.partners.scb/partners/sandbox",
+			"type": "string"
+		},
+		{
+			"key": "apikey",
+			"value": "l7c968392fb6fc4d5dafa08fa406d80cf1",
+			"type": "string"
+		},
+		{
+			"key": "secret",
+			"value": "d7d5fd9ed3a8403f9fd32b78e9b2bbfd",
+			"type": "string"
+		},
+		{
+			"key": "content",
+			"value": "application/json",
+			"type": "string"
+		}
+	]
+}

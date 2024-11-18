@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "bc46d91a-8269-48bf-aa85-4a1ab82933d2",
+		"name": "LINE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39556197",
+		"_collection_link": "https://api-team-3907.postman.co/workspace/API-Team-Workspace~d0431b36-296c-4de8-8809-aab1dae9b12f/collection/39556197-bc46d91a-8269-48bf-aa85-4a1ab82933d2?action=share&source=collection_link&creator=39556197"
+	},
+	"item": [
+		{
+			"name": "Web hook information",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get tokeen",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Get user profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.line.me/v2/bot/profile/U9c0d90780efca352cab6134f033b2e11",
+					"protocol": "https",
+					"host": [
+						"api",
+						"line",
+						"me"
+					],
+					"path": [
+						"v2",
+						"bot",
+						"profile",
+						"U9c0d90780efca352cab6134f033b2e11"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
